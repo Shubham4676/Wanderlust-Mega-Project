@@ -24,7 +24,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/DevMadhup/Wanderlust-Mega-Project.git","main")
+                    code_checkout("https://github.com/Shubham4676/Wanderlust-Mega-Project.git","main")
                 }
             }
         }
@@ -37,13 +37,13 @@ pipeline {
             }
         }
 
-        stage("OWASP: Dependency check"){
-            steps{
-                script{
-                    owasp_dependency()
-                }
-            }
-        }
+        // stage("OWASP: Dependency check"){
+        //     steps{
+        //         script{
+        //             owasp_dependency()
+        //         }
+        //     }
+        // }
         
         stage("SonarQube: Code Analysis"){
             steps{
@@ -89,11 +89,11 @@ pipeline {
             steps{
                 script{
                         dir('backend'){
-                            docker_build("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","madhupdevops")
+                            docker_build("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","shubham4467")
                         }
                     
                         dir('frontend'){
-                            docker_build("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","madhupdevops")
+                            docker_build("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","shubham4467")
                         }
                 }
             }
@@ -102,8 +102,8 @@ pipeline {
         stage("Docker: Push to DockerHub"){
             steps{
                 script{
-                    docker_push("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","madhupdevops") 
-                    docker_push("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","madhupdevops")
+                    docker_push("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","shubham4467") 
+                    docker_push("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","shubham4467")
                 }
             }
         }
